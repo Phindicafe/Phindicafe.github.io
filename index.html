@@ -117,6 +117,17 @@ button{font-family:inherit}
 .art .price b{font-family:var(--f-display);font-weight:400;font-size:34px;display:block}
 .art .price small{font-size:10.5px;font-weight:600;display:block;margin-top:3px}
 .art .bean{position:absolute;width:34px;z-index:3}
+/* ảnh thật thay ly vẽ ở hero / cta */
+.art .pc{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;border:5px solid var(--card);box-shadow:var(--shadow);background:var(--surface)}
+.art.photos .c0{width:42%;bottom:9%}
+.art.photos .c1{left:3%;width:33%;bottom:15%}
+.art.photos .c2{right:3%;width:33%;bottom:15%}
+.art.photos .c1 .pc{transform:rotate(-7deg)}
+.art.photos .c2 .pc{transform:rotate(7deg)}
+.art.photos .tbl{bottom:3%}
+.cta .cups img{width:96px;aspect-ratio:4/5;object-fit:cover;border-radius:16px;border:4px solid #fbf3e8;box-shadow:0 14px 28px -14px rgba(0,0,0,.55);transform:rotate(-6deg)}
+.cta .cups img:nth-child(2){width:124px;margin-left:-18px;transform:none;position:relative;z-index:1}
+.cta .cups img:nth-child(3){width:92px;margin-left:-18px;transform:rotate(6deg)}
 .hero-copy > *{animation:rise .9s var(--ease) both}
 .hero-copy > *:nth-child(2){animation-delay:.08s}.hero-copy > *:nth-child(3){animation-delay:.14s}.hero-copy > *:nth-child(4){animation-delay:.2s}
 .art{animation:pop 1.1s .1s var(--ease) both}
@@ -660,10 +671,14 @@ const find = n => ALL.find(x => x.name === n);
 const C0 = n => cup(find(n).cupo);
 
 /* hero, ribbon, cta */
-$('#art0').innerHTML = C0(HERO[0]); // hero giữ ly vẽ (bố cục 3 ly trên nền blob)
-$('#art1').innerHTML = C0(HERO[1]);
-$('#art2').innerHTML = C0(HERO[2]);
-$('#ctaCups').innerHTML = CTA_CUPS.map(C0).join('');
+// hero + cta: ảnh dọc img/doc-*.jpg (cắt 4:5); thiếu ảnh nào thì cả cụm quay về ly vẽ
+const DOC = n => PHOTOS[n] && PHOTOS[n].replace('img/', 'img/doc-');
+const pic = (n, eager) => `<img class="pc" src="${esc(DOC(n))}" alt="${esc(n)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'}>`;
+if (HERO.every(DOC)) {
+  $('.art').classList.add('photos');
+  $('#art0').innerHTML = pic(HERO[0], 1); $('#art1').innerHTML = pic(HERO[1], 1); $('#art2').innerHTML = pic(HERO[2], 1);
+} else { $('#art0').innerHTML = C0(HERO[0]); $('#art1').innerHTML = C0(HERO[1]); $('#art2').innerHTML = C0(HERO[2]); }
+$('#ctaCups').innerHTML = CTA_CUPS.every(DOC) ? CTA_CUPS.map(n => pic(n)).join('') : CTA_CUPS.map(C0).join('');
 $('#rt').innerHTML = (RIBBON.map(w => `<span>${w}</span><i></i>`).join('')).repeat(2);
 
 /* bestsellers */

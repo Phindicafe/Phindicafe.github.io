@@ -489,7 +489,20 @@ const SHOP = 'Phindi';
 const STORE_KEY = 'phindi-order';
 const CONTACT = { zalo: 'https://zalo.me/0393315295' }; // Hotline Zalo in trên menu: 0393 315 295
 const PHOTOS = {
-  // 'Phindi kem sữa': 'img/phindi-kem-sua.jpg',
+  'Phindi kem sữa':'img/phindi-kem-sua.jpg', 'Cà phê muối':'img/ca-phe-muoi.jpg', 'Sữa chua cà phê':'img/sua-chua-ca-phe.jpg',
+  'Bạc xỉu':'img/bac-xiu.jpg', 'Nâu phin':'img/nau-phin.jpg', 'Đen phin':'img/den-phin.jpg', 'Nâu xóc':'img/nau-xoc.jpg', 'Đen xóc':'img/den-xoc.jpg',
+  'Nâu xay':'img/nau-xay.jpg', 'Đen xay':'img/den-xay.jpg', 'Americano':'img/americano.jpg',
+  'Trà gừng mật ong':'img/tra-gung-mat-ong.jpg', 'Trà tắc xí muội':'img/tra-tac-xi-muoi.jpg', 'Trà đào cam sả':'img/tra-dao-cam-sa.jpg',
+  'Trà đào':'img/tra-dao.jpg', 'Trà chanh':'img/tra-chanh.jpg', 'Trà chanh việt quất':'img/tra-chanh-viet-quat.jpg',
+  'Trà sữa truyền thống':'img/tra-sua-truyen-thong.jpg', 'Trà sữa việt quất':'img/tra-sua-viet-quat.jpg', 'Trà sữa socola':'img/tra-sua-socola.jpg', 'Trà sữa matcha':'img/tra-sua-matcha.jpg',
+  'Sinh tố mãng cầu':'img/sinh-to-mang-cau.jpg', 'Sinh tố bơ':'img/sinh-to-bo.jpg', 'Sinh tố bơ mãng cầu':'img/sinh-to-bo-mang-cau.jpg',
+  'Sinh tố xoài':'img/sinh-to-xoai.jpg', 'Sinh tố xoài dứa':'img/sinh-to-xoai-dua.jpg', 'Sinh tố việt quất':'img/sinh-to-viet-quat.jpg',
+  'Sữa chua việt quất':'img/sua-chua-viet-quat.jpg', 'Sữa chua chanh dây':'img/sua-chua-chanh-day.jpg', 'Sữa chua đánh đá':'img/sua-chua-danh-da.jpg',
+  'Ép cam':'img/ep-cam.jpg', 'Ép cam cà rốt':'img/ep-cam-ca-rot.jpg', 'Ép cà rốt':'img/ep-ca-rot.jpg', 'Ép chanh leo':'img/ep-chanh-leo.jpg',
+  'Ép chanh':'img/ep-chanh.jpg', 'Ép dứa':'img/ep-dua.jpg', 'Ép ổi':'img/ep-oi.jpg',
+  'Cà phê đá xay':'img/ca-phe-da-xay.jpg', 'Chanh leo tuyết':'img/chanh-leo-tuyet.jpg', 'Chanh tuyết':'img/chanh-tuyet.jpg', 'Matcha đá xay':'img/matcha-da-xay.jpg',
+  'Cacao':'img/cacao.jpg', 'Sữa':'img/sua.jpg', 'Matcha latte':'img/matcha-latte.jpg',
+  // Chưa có ảnh (giữ ly vẽ): Nâu xay xóc, Đen xay xóc, Bò húc
 };
 const HERO = ['Phindi kem sữa', 'Trà đào cam sả', 'Matcha latte'];   // [ly giữa, trái, phải] – tên đúng như trong CATS
 const CTA_CUPS = ['Trà chanh', 'Cà phê muối', 'Trà sữa socola'];
@@ -647,7 +660,7 @@ const find = n => ALL.find(x => x.name === n);
 const C0 = n => cup(find(n).cupo);
 
 /* hero, ribbon, cta */
-$('#art0').innerHTML = media(find(HERO[0]));
+$('#art0').innerHTML = C0(HERO[0]); // hero giữ ly vẽ (bố cục 3 ly trên nền blob)
 $('#art1').innerHTML = C0(HERO[1]);
 $('#art2').innerHTML = C0(HERO[2]);
 $('#ctaCups').innerHTML = CTA_CUPS.map(C0).join('');
